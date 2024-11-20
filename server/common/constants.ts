@@ -1,4 +1,4 @@
-export const APP_NAME = 'CATAPULT';
+export const APP_NAME = 'QUIZ_MAKER';
 
 export const ID_NAME_LIST = ['user', 'task'] as const;
 
