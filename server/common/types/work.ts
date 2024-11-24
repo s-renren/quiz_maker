@@ -4,7 +4,6 @@ type WorkBase = {
   id: DtoId['work'];
   quiz: string;
   answer: string;
-  isCorrected: boolean;
 };
 
 export type SetQuiz = WorkBase & {

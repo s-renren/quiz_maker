@@ -684,6 +684,58 @@
         }
       }
     },
+    "/private/works": {
+      "get": {
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkEntity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "quiz": {
+                    "type": "string"
+                  },
+                  "answer": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "answer",
+                  "quiz"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateQuiz"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/session": {
       "post": {
         "requestBody": {
@@ -829,6 +881,119 @@
           },
           {
             "type": "string"
+          }
+        ]
+      },
+      "WorkEntity": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/SetQuiz"
+          },
+          {
+            "$ref": "#/components/schemas/CreateQuiz"
+          }
+        ]
+      },
+      "SetQuiz": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/Dto<\"work\">"
+              },
+              "quiz": {
+                "type": "string"
+              },
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer",
+              "id",
+              "quiz"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "choiceA": {
+                "type": "string"
+              },
+              "choiceB": {
+                "type": "string"
+              },
+              "choiceC": {
+                "type": "string"
+              },
+              "choiceD": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "choiceA",
+              "choiceB",
+              "choiceC",
+              "choiceD"
+            ]
+          }
+        ]
+      },
+      "Dto<\"work\">": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {}
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "CreateQuiz": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/Dto<\"work\">"
+              },
+              "quiz": {
+                "type": "string"
+              },
+              "answer": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "answer",
+              "id",
+              "quiz"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "choiceA": {
+                "type": "null"
+              },
+              "choiceB": {
+                "type": "null"
+              },
+              "choiceC": {
+                "type": "null"
+              },
+              "choiceD": {
+                "type": "null"
+              }
+            },
+            "required": [
+              "choiceA",
+              "choiceB",
+              "choiceC",
+              "choiceD"
+            ]
           }
         ]
       }
