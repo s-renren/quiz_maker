@@ -8,7 +8,7 @@ export const workMethod = {
     return {
       id,
       quiz: val.quiz,
-      answer: val.quiz,
+      answer: val.answer,
       choiceA: null,
       choiceB: null,
       choiceC: null,
