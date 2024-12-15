@@ -686,6 +686,16 @@
     },
     "/private/works": {
       "get": {
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
         "responses": {
           "2XX": {
             "content": {
@@ -693,7 +703,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WorkEntity"
+                    "$ref": "#/components/schemas/WorkDto"
                   }
                 }
               }
@@ -884,7 +894,7 @@
           }
         ]
       },
-      "WorkEntity": {
+      "WorkDto": {
         "anyOf": [
           {
             "$ref": "#/components/schemas/SetQuiz"

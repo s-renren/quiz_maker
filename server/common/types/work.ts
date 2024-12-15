@@ -6,6 +6,12 @@ type WorkBase = {
   answer: string;
 };
 
+export type WorkFetch = {
+  id: DtoId['work'];
+  quiz: string;
+  answer: string;
+};
+
 export type SetQuiz = WorkBase & {
   choiceA: string;
   choiceB: string;
@@ -20,4 +26,4 @@ export type CreateQuiz = WorkBase & {
   choiceD: null;
 };
 
-export type WorkEntity = CreateQuiz | SetQuiz;
+export type WorkDto = CreateQuiz | SetQuiz;

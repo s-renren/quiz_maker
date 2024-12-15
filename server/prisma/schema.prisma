@@ -28,7 +28,7 @@ model Task {
 }
 
 model Work {
-  id        String  @id
-  quiz      String
-  answer    String
+  id     String @id
+  quiz   String
+  answer String
 }
