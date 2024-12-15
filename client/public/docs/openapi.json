@@ -686,6 +686,16 @@
     },
     "/private/works": {
       "get": {
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
         "responses": {
           "2XX": {
             "content": {

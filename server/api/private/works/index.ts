@@ -3,6 +3,9 @@ import type { CreateQuiz, WorkDto } from 'common/types/work';
 
 export type Methods = DefineMethods<{
   get: {
+    query?: {
+      limit?: number;
+    }
     resBody: WorkDto[];
   };
   post: {
