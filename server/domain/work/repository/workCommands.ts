@@ -1,8 +1,8 @@
 import type { Prisma } from '@prisma/client';
-import type { WorkEntity } from 'common/types/work';
+import type { WorkDto } from 'common/types/work';
 
 export const workCommand = {
-  save: async (tx: Prisma.TransactionClient, work: WorkEntity): Promise<void> => {
+  save: async (tx: Prisma.TransactionClient, work: WorkDto): Promise<void> => {
     await tx.work.upsert({
       where: { id: work.id },
       create: {

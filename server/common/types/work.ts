@@ -20,4 +20,4 @@ export type CreateQuiz = WorkBase & {
   choiceD: null;
 };
 
-export type WorkEntity = CreateQuiz | SetQuiz;
+export type WorkDto = CreateQuiz | SetQuiz;

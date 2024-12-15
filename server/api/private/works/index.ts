@@ -1,9 +1,9 @@
 import type { DefineMethods } from 'aspida';
-import type { CreateQuiz, WorkEntity } from 'common/types/work';
+import type { CreateQuiz, WorkDto } from 'common/types/work';
 
 export type Methods = DefineMethods<{
   get: {
-    resBody: WorkEntity[];
+    resBody: WorkDto[];
   };
   post: {
     reqBody: { quiz: string; answer: string };

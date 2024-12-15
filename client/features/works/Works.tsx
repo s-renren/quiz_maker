@@ -1,5 +1,5 @@
 import type { DtoId } from 'common/types/brandedId';
-import type { WorkEntity } from 'common/types/work';
+import type { WorkDto } from 'common/types/work';
 import { useCatchApiErr } from 'hooks/useCatchApiErr';
 import type { FormEvent } from 'react';
 import { useCallback, useEffect, useState } from 'react';
@@ -17,12 +17,12 @@ type ContentDict = Record<DtoId['work'], string | undefined>;
 // }
 
 export const Works = () => {
-  const [works, setWorks] = useState<WorkEntity[]>();
+  const [works, setWorks] = useState<WorkDto[]>();
   const [quiz, setQuiz] = useState('');
   const [answer, setAnswer] = useState('');
   const [contentDict, setContentDict] = useState<ContentDict>({});
   const catchApiErr = useCatchApiErr();
-  const fetchContent = useCallback(async (w: WorkEntity) => {
+  const fetchContent = useCallback(async (w: WorkDto) => {
     const content = await fetch(w.quiz).then((b) => b.text());
     setContentDict((dict) => ({ ...dict, [w.id]: content }));
   }, []);

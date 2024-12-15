@@ -693,7 +693,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/WorkEntity"
+                    "$ref": "#/components/schemas/WorkDto"
                   }
                 }
               }
@@ -884,7 +884,7 @@
           }
         ]
       },
-      "WorkEntity": {
+      "WorkDto": {
         "anyOf": [
           {
             "$ref": "#/components/schemas/SetQuiz"
