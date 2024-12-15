@@ -5,7 +5,7 @@ export type Methods = DefineMethods<{
   get: {
     query?: {
       limit?: number;
-    }
+    };
     resBody: WorkDto[];
   };
   post: {

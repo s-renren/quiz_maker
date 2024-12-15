@@ -11,4 +11,4 @@ export type workFetchEntity = Omit<WorkFetch, 'id' | 'quiz' | 'answer'> & {
   id: EntityId['work'];
   quiz: string;
   answer: string;
-}
+};
