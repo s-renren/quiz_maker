@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 import { createCognitoUserClient, noCookieClient } from '../apiClient';
-import { GET, POST } from '../utils';
+import { DELETE, GET, POST } from '../utils';
 
 test(GET(noCookieClient.private.works), async () => {
   const userClient = await createCognitoUserClient();
@@ -22,6 +22,22 @@ test(POST(noCookieClient.private.works), async () => {
 
   expect(res.quiz).toBe(quiz);
   expect(res.answer).toBe(answer);
+});
+
+test(DELETE(noCookieClient.private.works), async () => {
+  const userClient = await createCognitoUserClient();
+  const quiz = 'testQuiz';
+  const answer = 'testAnswer';
+  const res = await userClient.private.works.$post({
+    body: {
+      quiz,
+      answer,
+    },
+  });
+
+  const deleted = await userClient.private.works._workId(res.id).$delete();
+
+  expect(deleted).toHaveLength(0);
 });
 
 // 追加テスト: データの取得後の検証
