@@ -28,16 +28,18 @@ test(DELETE(noCookieClient.private.works), async () => {
   const userClient = await createCognitoUserClient();
   const quiz = 'testQuiz';
   const answer = 'testAnswer';
-  const res = await userClient.private.works.$post({
+  const posts = await userClient.private.works.$post({
     body: {
       quiz,
       answer,
     },
   });
 
-  const deleted = await userClient.private.works._workId(res.id).$delete();
+  await userClient.private.works._workId(posts.id).$delete();
+  const res = await userClient.private.works.$get();
 
-  expect(deleted).toHaveLength(0);
+  expect(res).toHaveLength(0);
+  expect(res).toEqual([]);
 });
 
 // 追加テスト: データの取得後の検証
