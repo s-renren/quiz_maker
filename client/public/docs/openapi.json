@@ -696,19 +696,13 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "$ref": "#/components/schemas/Dto<\"work\">"
-                  }
-                },
-                "required": [
-                  "id"
-                ]
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkDto"
+                }
               }
             }
           }
@@ -962,17 +956,6 @@
           }
         ]
       },
-      "Dto<\"work\">": {
-        "allOf": [
-          {
-            "type": "object",
-            "properties": {}
-          },
-          {
-            "type": "string"
-          }
-        ]
-      },
       "WorkDto": {
         "anyOf": [
           {
@@ -1026,6 +1009,17 @@
               "choiceC",
               "choiceD"
             ]
+          }
+        ]
+      },
+      "Dto<\"work\">": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {}
+          },
+          {
+            "type": "string"
           }
         ]
       },

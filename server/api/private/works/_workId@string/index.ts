@@ -1,9 +1,9 @@
 import type { DefineMethods } from 'aspida';
-import type { DtoId } from 'common/types/brandedId';
+import type { WorkDto } from 'common/types/work';
 
 export type Methods = DefineMethods<{
   delete: {
     status: 200;
-    reqBody: { id: DtoId['work'] };
+    resBody: WorkDto;
   };
 }>;
