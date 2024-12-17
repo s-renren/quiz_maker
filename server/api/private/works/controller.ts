@@ -15,8 +15,8 @@ export default defineController(() => ({
     workUseCase.create(body.quiz, body.answer).then((work) => ({ status: 200, body: work })),
   delete: {
     validators: { body: z.object({ workId: brandedId.work.maybe }) },
-    handler: async ({ user, body }) => {
-      const work = await workUseCase.delete(user, body.workId);
+    handler: async ({ body }) => {
+      const work = await workUseCase.delete(body.workId);
 
       return { status: 200, body: work };
     },
