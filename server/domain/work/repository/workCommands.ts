@@ -1,20 +1,20 @@
 import type { Prisma } from '@prisma/client';
-import type { WorkDto } from 'common/types/work';
 import { assert } from 'console';
-import type { WorkDeleteVal } from '../model/workType';
+import type { WorkDeleteVal, WorkSaveVal } from '../model/workType';
 
 export const workCommand = {
-  save: async (tx: Prisma.TransactionClient, work: WorkDto): Promise<void> => {
+  save: async (tx: Prisma.TransactionClient, val: WorkSaveVal): Promise<void> => {
     await tx.work.upsert({
-      where: { id: work.id },
+      where: { id: val.work.id },
       create: {
-        id: work.id,
-        quiz: work.quiz,
-        answer: work.answer,
+        id: val.work.id,
+        quiz: val.work.quiz,
+        answer: val.work.answer,
+        authorId: val.work.author.id,
       },
       update: {
-        quiz: work.quiz,
-        answer: work.answer,
+        quiz: val.work.quiz,
+        answer: val.work.answer,
       },
     });
   },

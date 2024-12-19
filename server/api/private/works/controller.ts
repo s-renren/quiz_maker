@@ -11,8 +11,8 @@ export default defineController(() => ({
     status: 200,
     body: await workQuery.quizListAll(prismaClient).then((works) => works.map(toWorkDto)),
   }),
-  post: ({ body }) =>
-    workUseCase.create(body.quiz, body.answer).then((work) => ({ status: 200, body: work })),
+  post: ({ user, body }) =>
+    workUseCase.create(user, body).then((work) => ({ status: 200, body: work })),
   delete: {
     validators: { body: z.object({ workId: brandedId.work.maybe }) },
     handler: async ({ body }) => {

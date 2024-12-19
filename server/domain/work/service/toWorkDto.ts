@@ -11,4 +11,5 @@ export const toWorkDto = (work: workEntity): WorkDto => ({
   choiceB: null,
   choiceC: null,
   choiceD: null,
+  author: { ...work.author, id: brandedId.user.dto.parse(work.author.id) },
 });

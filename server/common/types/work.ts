@@ -4,7 +4,10 @@ type WorkBase = {
   id: DtoId['work'];
   quiz: string;
   answer: string;
+  author: { id: DtoId['user']; signInName: string };
 };
+
+export type WorkCreateVal = { quiz: string; answer: string };
 
 export type WorkFetch = {
   id: DtoId['work'];
