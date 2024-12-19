@@ -1,3 +1,4 @@
+import assert from 'assert';
 import type { UserDto } from 'common/types/user';
 import { brandedId } from 'service/brandedId';
 import { ulid } from 'ulid';
@@ -16,11 +17,11 @@ export const workMethod = {
       author: { id: brandedId.user.entity.parse(user.id), signInName: user.signInName },
     };
 
-    if (val.quiz === undefined) return { work };
-
     return { work };
   },
-  delete: (work: workEntity): WorkDeleteVal => {
+  delete: (user: UserDto, work: workEntity): WorkDeleteVal => {
+    assert(user.id === String(work.author.id));
+
     return { deletable: true, work };
   },
 };

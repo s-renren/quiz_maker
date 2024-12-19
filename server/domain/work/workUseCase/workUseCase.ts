@@ -18,10 +18,10 @@ export const workUseCase = {
       return toWorkDto(createWork.work)
     });
   },
-  delete: (workId: MaybeId['work']): Promise<WorkDto> =>
+  delete: (user: UserDto, workId: MaybeId['work']): Promise<WorkDto> =>
     transaction('RepeatableRead', async (tx) => {
       const work = await workQuery.findById(tx, workId);
-      const deleted = workMethod.delete(work);
+      const deleted = workMethod.delete(user, work);
 
       await workCommand.delete(tx, deleted);
 
