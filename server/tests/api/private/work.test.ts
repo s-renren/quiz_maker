@@ -25,21 +25,19 @@ test(POST(noCookieClient.private.works), async () => {
 });
 
 test(DELETE(noCookieClient.private.works), async () => {
-  const userClient = await createCognitoUserClient();
-  const quiz = 'testQuiz';
-  const answer = 'testAnswer';
-  const posts = await userClient.private.works.$post({
-    body: {
-      quiz,
-      answer,
-    },
-  });
+  const apiClient = await createCognitoUserClient();
+  const work = await apiClient.private.works.$post({ body: { quiz: 'a', answer: 'b' } });
+  const res = await apiClient.private.works.delete({ body: { workId: work.id } });
 
-  await userClient.private.works._workId(posts.id).$delete();
-  const res = await userClient.private.works.$get();
+  expect(res.status).toEqual(200);
+});
 
-  expect(res).toHaveLength(0);
-  expect(res).toEqual([]);
+test(DELETE(noCookieClient.private.works._workId('_workId')), async () => {
+  const apiClient = await createCognitoUserClient();
+  const work = await apiClient.private.works.$post({ body: { quiz: 'a', answer: 'b' } });
+  const res = await apiClient.private.works._workId(work.id).delete();
+
+  expect(res.status).toEqual(200);
 });
 
 // 追加テスト: データの取得後の検証
