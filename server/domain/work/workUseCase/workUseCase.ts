@@ -15,7 +15,7 @@ export const workUseCase = {
 
       await workCommand.save(tx, createWork);
 
-      return toWorkDto(createWork.work)
+      return toWorkDto(createWork.work);
     });
   },
   delete: (user: UserDto, workId: MaybeId['work']): Promise<WorkDto> =>
