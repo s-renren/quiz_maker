@@ -15,6 +15,7 @@ model User {
   photoUrl    String?
   createdAt   DateTime
   tasks       Task[]
+  Work        Work[]
 }
 
 model Task {
@@ -28,7 +29,9 @@ model Task {
 }
 
 model Work {
-  id     String @id
-  quiz   String
-  answer String
+  id       String @id
+  quiz     String
+  answer   String
+  Author   User   @relation(fields: [authorId], references: [id])
+  authorId String
 }

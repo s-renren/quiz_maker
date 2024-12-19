@@ -684,6 +684,31 @@
         }
       }
     },
+    "/private/works/{workId}": {
+      "delete": {
+        "parameters": [
+          {
+            "name": "workId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/private/works": {
       "get": {
         "parameters": [
@@ -738,7 +763,44 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateQuiz"
+                  "$ref": "#/components/schemas/WorkDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "workId": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/Branded<\"maybe\">"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Dto<\"work\">"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "workId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkDto"
                 }
               }
             }
@@ -917,10 +979,26 @@
               },
               "answer": {
                 "type": "string"
+              },
+              "author": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "#/components/schemas/Dto<\"user\">"
+                  },
+                  "signInName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "signInName"
+                ]
               }
             },
             "required": [
               "answer",
+              "author",
               "id",
               "quiz"
             ]
@@ -974,10 +1052,26 @@
               },
               "answer": {
                 "type": "string"
+              },
+              "author": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "#/components/schemas/Dto<\"user\">"
+                  },
+                  "signInName": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "signInName"
+                ]
               }
             },
             "required": [
               "answer",
+              "author",
               "id",
               "quiz"
             ]

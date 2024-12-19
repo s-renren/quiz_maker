@@ -1,63 +1,73 @@
-import type { DtoId } from 'common/types/brandedId';
+import useAspidaSWR from '@aspida/swr';
 import type { WorkDto } from 'common/types/work';
+import { labelValidator } from 'common/validators/task';
+import { useAlert } from 'hooks/useAlert';
 import { useCatchApiErr } from 'hooks/useCatchApiErr';
 import type { FormEvent } from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { apiClient } from 'utils/apiClient';
 import styles from './works.module.css';
 
-type ContentDict = Record<DtoId['work'], string | undefined>;
-
-// const MainContent = (props: {work:WorkEntity;contentDict:ContentDict}) => {
-//   return (
-//     <div>
-
-//     </div>
-//   );
-// }
+// type ContentDict = Record<DtoId['work'], string | undefined>;
 
 export const Works = () => {
-  const [works, setWorks] = useState<WorkDto[]>();
+  // const [works, setWorks] = useState<WorkDto[]>();
+  const { setAlert } = useAlert();
+  const { data: works, mutate: mutateTasks } = useAspidaSWR(apiClient.private.works, {
+    refreshInterval: 5000,
+  });
   const [quiz, setQuiz] = useState('');
   const [answer, setAnswer] = useState('');
-  const [contentDict, setContentDict] = useState<ContentDict>({});
   const catchApiErr = useCatchApiErr();
-  const fetchContent = useCallback(async (w: WorkDto) => {
-    const content = await fetch(w.quiz).then((b) => b.text());
-    setContentDict((dict) => ({ ...dict, [w.id]: content }));
-  }, []);
+  // const [contentDict, setContentDict] = useState<ContentDict>({});
+  // const fetchContent = useCallback(async (w: WorkDto) => {
+  //   const content = await fetch(w.quiz).then((b) => b.text());
+  //   setContentDict((dict) => ({ ...dict, [w.id]: content }));
+  // }, []);
 
   const createWork = async (e: FormEvent) => {
     e.preventDefault();
-    setQuiz('');
-    setAnswer('');
 
-    const work = await apiClient.private.works
+    const parsedLabel = labelValidator.safeParse(quiz);
+
+    if (parsedLabel.error) {
+      await setAlert(parsedLabel.error.issues[0].message);
+      return;
+    }
+
+    await apiClient.private.works
       .$post({
         body: {
           quiz,
           answer,
         },
       })
+      .then((work) => mutateTasks((works) => [work, ...(works ?? [])]))
       .catch(catchApiErr);
-
-    if (work !== null && works?.every((w) => w.id !== work.id)) {
-      setWorks((works) => [work, ...(works ?? [])]);
-    }
+    setQuiz('');
+    setAnswer('');
   };
 
-  useEffect(() => {
-    if (works !== undefined) return;
-
-    apiClient.private.works
-      .$get()
-      .then((ws) => {
-        setWorks(ws);
-
-        return Promise.all(ws.map(fetchContent));
-      })
+  const deleteWork = async (work: WorkDto) => {
+    await apiClient.private.works
+      ._workId(work.id)
+      .$delete()
+      .then((work) => mutateTasks((works) => works?.filter((w) => w.id !== work.id)))
       .catch(catchApiErr);
-  }, [catchApiErr, fetchContent, works, contentDict]);
+  };
+
+  // useEffect(() => {
+  //   if (works !== undefined) return;
+
+  //   apiClient.private.works
+  //     .$get()
+  //     .then((ws) => {
+  //       setWorks(ws);
+
+  //       return Promise.all(ws.map(fetchContent));
+  //     })
+  //     .catch(catchApiErr);
+  // }, [catchApiErr, fetchContent, works, contentDict]);
 
   return (
     <div className={styles.main}>
@@ -88,6 +98,9 @@ export const Works = () => {
           <div className={styles.form}>
             <div className={styles.title}>
               <span>{work.quiz}</span>
+              <button className={styles.btn} onClick={() => deleteWork(work)}>
+                DELETE
+              </button>
             </div>
           </div>
         </div>

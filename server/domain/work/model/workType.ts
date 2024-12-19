@@ -1,14 +1,13 @@
-import type { WorkDto, WorkFetch } from 'common/types/work';
+import type { WorkDto } from 'common/types/work';
 import type { EntityId } from 'service/brandedId';
 
-export type workEntity = Omit<WorkDto, 'id' | 'quiz' | 'answer'> & {
+export type workEntity = Omit<WorkDto, 'id' | 'quiz' | 'answer' | 'author'> & {
   id: EntityId['work'];
   quiz: string;
   answer: string;
+  author: Omit<WorkDto['author'], 'id'> & { id: EntityId['user'] };
 };
 
-export type workFetchEntity = Omit<WorkFetch, 'id' | 'quiz' | 'answer'> & {
-  id: EntityId['work'];
-  quiz: string;
-  answer: string;
-};
+export type WorkCreateSaveVal = { quiz: string; answer: string };
+export type WorkSaveVal = { work: workEntity };
+export type WorkDeleteVal = { deletable: boolean; work: workEntity };

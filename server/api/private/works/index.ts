@@ -1,5 +1,6 @@
 import type { DefineMethods } from 'aspida';
-import type { CreateQuiz, WorkDto } from 'common/types/work';
+import type { MaybeId } from 'common/types/brandedId';
+import type { WorkCreateVal, WorkDto } from 'common/types/work';
 
 export type Methods = DefineMethods<{
   get: {
@@ -8,8 +9,17 @@ export type Methods = DefineMethods<{
     };
     resBody: WorkDto[];
   };
+
   post: {
-    reqBody: { quiz: string; answer: string };
-    resBody: CreateQuiz;
+    reqBody: WorkCreateVal;
+    resBody: WorkDto;
+  };
+
+  delete: {
+    reqBody: {
+      workId: MaybeId['work'];
+    };
+    status: 200;
+    resBody: WorkDto;
   };
 }>;
