@@ -1,6 +1,7 @@
 import useAspidaSWR from '@aspida/swr';
 import { labelValidator } from 'common/validators/task';
 import styles from 'features/makeQuiz/MakeQuiz.module.css';
+import QuizList from 'features/quizList/QuizList';
 import { useAlert } from 'hooks/useAlert';
 import { useCatchApiErr } from 'hooks/useCatchApiErr';
 import { Layout } from 'layouts/Layout';
@@ -53,32 +54,33 @@ const MakeQuiz = () => {
               ホームに戻る
             </a>
           </div>
-            <div className={styles.makeQuiz}>
-              <form className={styles.form} onSubmit={createWork}>
+          <div className={styles.makeQuiz}>
+            <form className={styles.form} onSubmit={createWork}>
+              <input
+                value={quiz}
+                className={styles.textInput}
+                type="text"
+                placeholder="問題文を入力してください"
+                onChange={(e) => setQuiz(e.target.value)}
+              />
+              <input
+                value={answer}
+                className={styles.textInput}
+                type="text"
+                placeholder="答えを入力してください"
+                onChange={(e) => setAnswer(e.target.value)}
+              />
+              <div className={styles.controls}>
                 <input
-                  value={quiz}
-                  className={styles.textInput}
-                  type="text"
-                  placeholder="問題文を入力してください"
-                  onChange={(e) => setQuiz(e.target.value)}
+                  className={styles.btn}
+                  disabled={quiz === '' || answer === ''}
+                  type="submit"
+                  value="CREATE"
                 />
-                <input
-                  value={answer}
-                  className={styles.textInput}
-                  type="text"
-                  placeholder="答えを入力してください"
-                  onChange={(e) => setAnswer(e.target.value)}
-                />
-                <div className={styles.controls}>
-                  <input
-                    className={styles.btn}
-                    disabled={quiz === '' || answer === ''}
-                    type="submit"
-                    value="CREATE"
-                  />
-                </div>
-              </form>
-            </div>
+              </div>
+            </form>
+          </div>
+          <QuizList />
         </div>
       )}
     />
