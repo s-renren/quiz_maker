@@ -5,9 +5,8 @@ import styles from './index.module.css';
 const Home = () => {
   return (
     <Layout
-      render={(user) => (
+      render={() => (
         <div className={styles.container}>
-          <div className={styles.title}>Hello {user.displayName}!</div>
           <Works />
         </div>
       )}
