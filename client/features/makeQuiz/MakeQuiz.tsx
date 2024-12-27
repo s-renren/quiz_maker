@@ -1,7 +1,7 @@
 import useAspidaSWR from '@aspida/swr';
 import { labelValidator } from 'common/validators/task';
 import styles from 'features/makeQuiz/MakeQuiz.module.css';
-import QuizList from 'features/quizList/QuizList';
+import Quiz from 'features/quiz/Quiz';
 import { useAlert } from 'hooks/useAlert';
 import { useCatchApiErr } from 'hooks/useCatchApiErr';
 import { Layout } from 'layouts/Layout';
@@ -80,7 +80,7 @@ const MakeQuiz = () => {
               </div>
             </form>
           </div>
-          <QuizList />
+          <Quiz />
         </div>
       )}
     />

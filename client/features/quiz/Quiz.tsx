@@ -2,9 +2,9 @@ import useAspidaSWR from '@aspida/swr';
 import type { WorkDto } from 'common/types/work';
 import { useCatchApiErr } from 'hooks/useCatchApiErr';
 import { apiClient } from 'utils/apiClient';
-import styles from './QuizList.module.css';
+import styles from './Quiz.module.css';
 
-const QuizList = () => {
+const Quiz = () => {
   const { data: works, mutate: mutateWorks } = useAspidaSWR(apiClient.private.works, {
     refreshInterval: 5000,
   });
@@ -35,4 +35,4 @@ const QuizList = () => {
   );
 };
 
-export default QuizList;
+export default Quiz;

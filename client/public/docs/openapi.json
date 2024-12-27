@@ -55,6 +55,238 @@
         }
       }
     },
+    "/private/lists/{listId}": {
+      "delete": {
+        "parameters": [
+          {
+            "name": "listId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "$ref": "#/components/schemas/Dto<\"list\">"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "$ref": "#/components/schemas/Dto<\"user\">"
+                        },
+                        "signInName": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "signInName"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "author",
+                    "id",
+                    "name"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/private/lists": {
+      "get": {
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "$ref": "#/components/schemas/Dto<\"list\">"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "author": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "$ref": "#/components/schemas/Dto<\"user\">"
+                          },
+                          "signInName": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "signInName"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "author",
+                      "id",
+                      "name"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "2XX": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "$ref": "#/components/schemas/Dto<\"list\">"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "$ref": "#/components/schemas/Dto<\"user\">"
+                        },
+                        "signInName": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "signInName"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "author",
+                    "id",
+                    "name"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "listId": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/Branded<\"maybe\">"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Dto<\"list\">"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "listId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "$ref": "#/components/schemas/Dto<\"list\">"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "$ref": "#/components/schemas/Dto<\"user\">"
+                        },
+                        "signInName": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "signInName"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "author",
+                    "id",
+                    "name"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/private/me": {
       "get": {
         "responses": {
@@ -905,7 +1137,29 @@
           "server"
         ]
       },
+      "Dto<\"list\">": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {}
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
       "Dto<\"user\">": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {}
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "Branded<\"maybe\">": {
         "allOf": [
           {
             "type": "object",
@@ -943,17 +1197,6 @@
         "required": [
           "size",
           "type"
-        ]
-      },
-      "Branded<\"maybe\">": {
-        "allOf": [
-          {
-            "type": "object",
-            "properties": {}
-          },
-          {
-            "type": "string"
-          }
         ]
       },
       "WorkDto": {
