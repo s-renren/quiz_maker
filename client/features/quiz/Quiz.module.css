@@ -1,0 +1,73 @@
+.quizList {
+  display: grid;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  justify-content: center;
+}
+
+@media (width <= 512px) {
+  .quizList {
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    justify-content: center;
+  }
+}
+
+@media (width >= 800px) {
+  .quizList {
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    justify-content: center;
+  }
+}
+
+.quiz {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 4px 4px 10px #0002;
+}
+
+.title {
+  font-size: 24px;
+  color: transparent;
+  text-align: center;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: gradient 10s ease infinite;
+}
+
+.form {
+  width: 184px;
+  padding: 20px 16px 16px;
+}
+
+.btn {
+  padding: 2px 4px;
+  margin-left: auto;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 4px;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
