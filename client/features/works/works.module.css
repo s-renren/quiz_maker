@@ -30,6 +30,11 @@
   gap: 16px;
 }
 
+.listName {
+  display: flex;
+  font-size: 40px;
+}
+
 @media (width >= 800px) {
   .btnList {
     display: flex;

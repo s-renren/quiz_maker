@@ -1,4 +1,4 @@
-import Quiz from 'features/quiz/Quiz';
+import List from 'features/list/List';
 import styles from './works.module.css';
 
 export const Works = () => {
@@ -16,7 +16,10 @@ export const Works = () => {
           </a>
         </div>
       </div>
-      <Quiz />
+      <div className={styles.listName}>
+        <p>リスト一覧</p>
+      </div>
+      <List />
     </div>
   );
 };
