@@ -17,6 +17,7 @@ const toQuizEntity = async (prismaWork: Work & { Author: User }): Promise<workEn
       id: brandedId.user.entity.parse(prismaWork.authorId),
       signInName: prismaWork.Author.signInName,
     },
+    list: prismaWork.list,
   };
 };
 

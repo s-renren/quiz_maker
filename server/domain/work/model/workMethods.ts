@@ -15,6 +15,7 @@ export const workMethod = {
       choiceC: null,
       choiceD: null,
       author: { id: brandedId.user.entity.parse(user.id), signInName: user.signInName },
+      list: val.list,
     };
 
     return { work };
