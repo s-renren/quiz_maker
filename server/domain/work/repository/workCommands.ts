@@ -11,10 +11,12 @@ export const workCommand = {
         quiz: val.work.quiz,
         answer: val.work.answer,
         authorId: val.work.author.id,
+        list: val.work.list,
       },
       update: {
         quiz: val.work.quiz,
         answer: val.work.answer,
+        list: val.work.list,
       },
     });
   },

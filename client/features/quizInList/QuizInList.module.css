@@ -69,6 +69,11 @@
   border-radius: 4px;
 }
 
+.listName {
+  display: flex;
+  font-size: 40px;
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;

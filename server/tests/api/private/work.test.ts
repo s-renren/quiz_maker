@@ -13,20 +13,23 @@ test(POST(noCookieClient.private.works), async () => {
   const userClient = await createCognitoUserClient();
   const quiz = 'testQuiz';
   const answer = 'testAnswer';
+  const list = 'name';
   const res = await userClient.private.works.$post({
     body: {
       quiz,
       answer,
+      list,
     },
   });
 
   expect(res.quiz).toBe(quiz);
   expect(res.answer).toBe(answer);
+  expect(res.list).toBe(list);
 });
 
 test(DELETE(noCookieClient.private.works), async () => {
   const apiClient = await createCognitoUserClient();
-  const work = await apiClient.private.works.$post({ body: { quiz: 'a', answer: 'b' } });
+  const work = await apiClient.private.works.$post({ body: { quiz: 'a', answer: 'b', list: 'c' } });
   const res = await apiClient.private.works.delete({ body: { workId: work.id } });
 
   expect(res.status).toEqual(200);
@@ -34,7 +37,7 @@ test(DELETE(noCookieClient.private.works), async () => {
 
 test(DELETE(noCookieClient.private.works._workId('_workId')), async () => {
   const apiClient = await createCognitoUserClient();
-  const work = await apiClient.private.works.$post({ body: { quiz: 'a', answer: 'b' } });
+  const work = await apiClient.private.works.$post({ body: { quiz: 'a', answer: 'b', list: 'c' } });
   const res = await apiClient.private.works._workId(work.id).delete();
 
   expect(res.status).toEqual(200);
@@ -45,10 +48,12 @@ test('GET after POST', async () => {
   const userClient = await createCognitoUserClient();
   const quiz = 'testQuiz2';
   const answer = 'testAnswer2';
+  const list = 'name';
   await userClient.private.works.$post({
     body: {
       quiz,
       answer,
+      list,
     },
   });
 

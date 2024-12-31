@@ -5,15 +5,10 @@ type WorkBase = {
   quiz: string;
   answer: string;
   author: { id: DtoId['user']; signInName: string };
+  list: string;
 };
 
-export type WorkCreateVal = { quiz: string; answer: string };
-
-export type WorkFetch = {
-  id: DtoId['work'];
-  quiz: string;
-  answer: string;
-};
+export type WorkCreateVal = { quiz: string; answer: string; list: string };
 
 export type SetQuiz = WorkBase & {
   choiceA: string;

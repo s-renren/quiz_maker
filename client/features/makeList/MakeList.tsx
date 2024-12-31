@@ -42,10 +42,17 @@ const MakeList = () => {
     <Layout
       render={() => (
         <div className={styles.main}>
-          <div className={styles.makeQuiz}>
-            <a href="/" className={styles.makeBtn}>
-              ホームに戻る
-            </a>
+          <div className={styles.btnList}>
+            <div className={styles.makeQuiz}>
+              <a href="/" className={styles.makeBtn}>
+                ホームに戻る
+              </a>
+            </div>
+            <div className={styles.makeQuiz}>
+              <a href="/makeQuiz" className={styles.makeBtn}>
+                問題を作成する
+              </a>
+            </div>
           </div>
           <div className={styles.makeQuiz}>
             <form className={styles.form} onSubmit={createList}>
@@ -60,6 +67,9 @@ const MakeList = () => {
                 <input className={styles.btn} disabled={list === ''} type="submit" value="CREATE" />
               </div>
             </form>
+          </div>
+          <div className={styles.listName}>
+            <p>リスト一覧</p>
           </div>
           <List />
         </div>
