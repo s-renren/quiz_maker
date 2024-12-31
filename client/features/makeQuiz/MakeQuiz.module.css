@@ -64,6 +64,14 @@
   gap: 16px;
 }
 
+@media (width >= 800px) {
+  .btnList {
+    display: flex;
+    gap: 16px;
+    margin-left: 16px;
+  }
+}
+
 .selectContainer {
   position: relative;
 }
