@@ -980,10 +980,14 @@
                   },
                   "answer": {
                     "type": "string"
+                  },
+                  "list": {
+                    "type": "string"
                   }
                 },
                 "required": [
                   "answer",
+                  "list",
                   "quiz"
                 ]
               }
@@ -1237,12 +1241,16 @@
                   "id",
                   "signInName"
                 ]
+              },
+              "list": {
+                "type": "string"
               }
             },
             "required": [
               "answer",
               "author",
               "id",
+              "list",
               "quiz"
             ]
           },
@@ -1310,12 +1318,16 @@
                   "id",
                   "signInName"
                 ]
+              },
+              "list": {
+                "type": "string"
               }
             },
             "required": [
               "answer",
               "author",
               "id",
+              "list",
               "quiz"
             ]
           },

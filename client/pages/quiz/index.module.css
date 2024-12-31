@@ -1,0 +1,45 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  width: 1000px;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-top: 32px;
+}
+
+.container {
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 16px;
+  background: #f8f8f8;
+}
+
+.makeBtn {
+  padding: 4px 8px;
+  margin-left: auto;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 4px;
+}
+
+.makeQuiz {
+  overflow: hidden;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 4px 4px 10px #0002;
+}
+
+.btnList {
+  display: flex;
+  gap: 16px;
+}
+
+@media (width >= 800px) {
+  .btnList {
+    display: flex;
+    gap: 16px;
+    margin-left: 16px;
+  }
+}
