@@ -18,19 +18,21 @@ const Quiz = () => {
       .catch(catchApiErr);
   };
   return (
-    <div className={styles.quizList}>
-      {works?.map((work) => (
-        <div key={work.id} className={styles.quiz}>
-          <div className={styles.form}>
-            <div className={styles.title}>
-              <span>{work.quiz}</span>
-              <button className={styles.btn} onClick={() => deleteWork(work)}>
-                DELETE
-              </button>
+    <div className={styles.main}>
+      <div className={styles.quizList}>
+        {works?.map((work) => (
+          <div key={work.id} className={styles.quiz}>
+            <div className={styles.form}>
+              <div className={styles.title}>
+                <span>{work.quiz}</span>
+                <button className={styles.btn} onClick={() => deleteWork(work)}>
+                  DELETE
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
