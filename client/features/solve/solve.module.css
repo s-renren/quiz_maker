@@ -1,0 +1,77 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  width: 1000px;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-top: 32px;
+}
+
+.makeQuiz {
+  display: inline-block;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 4px 4px 10px #0002;
+}
+
+.makeBtn {
+  padding: 4px 8px;
+  margin-left: auto;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 4px;
+}
+
+.btnList {
+  display: flex;
+  gap: 16px;
+}
+
+.listName {
+  display: flex;
+  font-size: 24px;
+}
+
+.selectBtn {
+  display: flex;
+  padding: 4px 8px;
+  margin-top: 8px;
+  margin-left: auto;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 4px;
+}
+
+@media (width >= 800px) {
+  .btnList {
+    display: flex;
+    gap: 16px;
+    margin-left: 16px;
+  }
+}
+
+.selectContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.selectArrow {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  border-bottom: 2px solid #777;
+  border-left: 2px solid #777;
+  transition: transform 0.2s ease-in-out;
+  transform: translateY(-50%);
+}
+
+.selectArrow.active {
+  transform: translateY(-50%) rotate(45deg);
+}
