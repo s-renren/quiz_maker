@@ -15,6 +15,11 @@ export const Works = () => {
             リストを作成する
           </a>
         </div>
+        <div className={styles.makeQuiz}>
+          <a href="/solve" className={styles.makeBtn}>
+            問題を解く
+          </a>
+        </div>
       </div>
       <div className={styles.listName}>
         <p>リスト一覧</p>
