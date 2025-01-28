@@ -1,7 +1,6 @@
-import useAspidaSWR from '@aspida/swr';
-import { useCatchApiErr } from 'hooks/useCatchApiErr';
 import React, { useEffect, useState } from 'react';
 import { apiClient } from 'utils/apiClient';
+import Problem from './Problem';
 import styles from './solve.module.css';
 
 interface Option {
@@ -13,15 +12,8 @@ export const Solve = () => {
   const [listName, setListName] = useState<Option | null>(null);
   const [options, setOptions] = useState<Option[]>([]);
   const [, setArrowActive] = useState(false);
-  const [id, setId] = useState('');
   const [isSolveStart, setIsSolveStart] = useState(false);
-  const { data: works } = useAspidaSWR(apiClient.private.works, {
-    refreshInterval: 5000,
-  });
-  const { data: name } = useAspidaSWR(apiClient.private.lists, {
-    refreshInterval: 5000,
-  });
-  const catchApiErr = useCatchApiErr();
+  const [listNameId, setListNameId] = useState<Option>({ id: '', name: '' });
 
   const getAllList = async () => {
     const res = await apiClient.private.lists.$get();
@@ -36,13 +28,11 @@ export const Solve = () => {
     const selected = options.find((option) => option.id === selectedValue);
     setListName(selected || null);
   };
-  const getId = () => {
-    
-  }
 
   const handleSolveStart = () => {
     if (listName === null || isSolveStart) return;
     setIsSolveStart(true);
+    setListNameId(listName);
   };
 
   useEffect(() => {
@@ -52,18 +42,8 @@ export const Solve = () => {
     <div className={styles.main}>
       <div className={styles.btnList}>
         <div className={styles.makeQuiz}>
-          <a href="/makeQuiz" className={styles.makeBtn}>
-            問題を作成する
-          </a>
-        </div>
-        <div className={styles.makeQuiz}>
-          <a href="/makeList" className={styles.makeBtn}>
-            リストを作成する
-          </a>
-        </div>
-        <div className={styles.makeQuiz}>
-          <a href="/solve" className={styles.makeBtn}>
-            問題を解く
+          <a href="/" className={styles.makeBtn}>
+            ホームに戻る
           </a>
         </div>
       </div>
@@ -88,7 +68,7 @@ export const Solve = () => {
           問題を解く
         </button>
       </div>
-      {isSolveStart && <div>問題を解く準備ができました！</div>}
+      <Problem isSolveStart={isSolveStart} listNameId={listNameId} />
     </div>
   );
 };
